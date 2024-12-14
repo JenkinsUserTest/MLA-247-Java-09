@@ -52,7 +52,3 @@ having max(salary)>10000;
 
 /*select max(avg(salary))
 from employees;*/
-
-
-select employee_id,department_id
-from employees;

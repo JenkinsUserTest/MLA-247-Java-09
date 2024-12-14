@@ -50,5 +50,3 @@ group by department_id
 having max(salary)>10000;
 
 
-/*select max(avg(salary))
-from employees;*/

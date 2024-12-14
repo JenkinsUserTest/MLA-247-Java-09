@@ -76,5 +76,3 @@ on e.hire_date
 between j.start_date and j.end_date;
 
 
-select last_name,salary from employees where last_name='De Haan';
-select * from employees where salary>17000;

@@ -13,8 +13,3 @@ limit 5;
 
 delete  from departments
 where department_id=10;
-
-use test;
-
-delete from courses
-where course_id='C001';

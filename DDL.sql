@@ -134,14 +134,6 @@ insert into student_info1 values(1,'sabbir');
 drop table student_info1;
 
 describe student_info1;
-/*
-create table student_details(
-roll_no int primary key,
-first_name varchar(40),
-last_name varchar(40),
-full_name varchar(60) GENERATED ALWAYS as (CONCAT(first_name,' ',last_name))
-);
-*/
 
 create table dept_info(
 dept_id int primary key,

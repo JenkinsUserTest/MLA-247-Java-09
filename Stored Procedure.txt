@@ -1,0 +1,22 @@
+set @salary decimal(10,2);
+
+
+DELIMITER //
+
+CREATE PROCEDURE GetEmployeeSalary (IN emp_id INT, OUT emp_salary DECIMAL(10, 2))
+BEGIN
+    SELECT salary INTO emp_salary
+    FROM employees
+    WHERE employee_id = emp_id;
+END //
+
+DELIMITER ;
+
+
+
+CALL GetEmployeeSalary(1, @salary);
+SELECT @salary;
+
+
+DROP PROCEDURE IF EXISTS GetEmployeeSalary;
+

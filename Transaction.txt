@@ -1,0 +1,82 @@
+use hr_schema;
+
+set autocommit=off;
+
+insert into departments values(88,'some department',101,1700);
+
+commit;
+
+
+select * from departments where department_id=88;
+
+
+create table customer
+(
+cust_id int primary key,
+cust_first_name varchar(40) not null,
+cust_last_name varchar(40) not null,
+cust_location varchar(40) not null
+);
+
+insert into customer values(1001,'sabbir','poonawala','Pune');
+
+create table ordercustomer(
+order_id varchar(40) primary key,
+order_desc varchar(40) not null,
+cust_id int,
+foreign key(cust_id)
+references customer(cust_id)
+);
+
+create table orderdetails(
+sr_no int primary key,
+order_id varchar(40),
+quantity int not null,
+unitprice double not null,
+total double not null,
+foreign key(order_id)
+references ordercustomer(order_id)
+);
+
+use hr_schema;
+
+start transaction;
+insert into ordercustomer values('ODR1001','Electronic product',1001);
+insert into orderdetails values(1,'ODR1001',2,100,200);
+commit;
+
+select c.cust_first_name,c.cust_last_name,c.cust_location,oc.order_desc,od.total
+from customer c
+join ordercustomer oc 
+on (c.cust_id=oc.cust_id)
+join
+orderdetails od
+on(oc.order_id=od.order_id);
+
+start transaction;
+insert into ordercustomer values('ODR1003','Non Electronic product',1001);
+insert into orderdetails values(3,'ODR1003',4,500,2000);
+rollback;
+
+
+select c.cust_first_name,c.cust_last_name,c.cust_location,oc.order_desc,od.total
+from customer c
+join ordercustomer oc 
+on (c.cust_id=oc.cust_id)
+join
+orderdetails od
+on(oc.order_id=od.order_id);
+
+select * from ordercustomer;
+
+
+show global variables like '%isolation%';
+
+set global tx_isolation='read-committed';
+
+
+start transaction;
+update employees
+set salary=50000
+where employee_id=101;
+commit;
